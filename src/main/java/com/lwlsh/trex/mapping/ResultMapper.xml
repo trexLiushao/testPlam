@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lwlsh.trex.dao.IresultDao">
+	<!-- 数据访问层 -->
+	<resultMap type="com.lwlsh.trex.pojo.ResultPojo" id="BaseResultMap">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="tcr_tcmId" property="tcr_tcmId" jdbcType="INTEGER" />
+	<!-- 	<result column="tcr_runTime" property="tcr_runTime" jdbcType="java.util.Date" />
+		<result column="tcr_endTime" property="tcr_endTime" jdbcType="java.util.Date" /> -->
+		<result column="tcr_passCaseNum" property="tcr_passCaseNum" jdbcType="INTEGER" />
+		<result column="tcr_failCaseNum" property="tcr_failCaseNum" jdbcType="INTEGER" />
+		<result column="tcr_skipCaseNum" property="tcr_skipCaseNum" jdbcType="INTEGER" />
+		<result column="tcr_isRunStaus" property="tcr_isRunStaus" jdbcType="INTEGER" />
+	</resultMap>
+      
+   <!-- 增加用例执行结果--> 
+  <insert id="addResultInfo">
+  insert into trex_testcaseresult(tcr_tcmId, tcr_runTime,tcr_endTime,tcr_passCaseNum,tcr_failCaseNum,tcr_skipCaseNum,tcr_isRunStaus) 
+   values(#{tcr_tcmId},#{tcr_runTime},#{tcr_endTime},#{tcr_passCaseNum},#{tcr_failCaseNum},#{tcr_skipCaseNum},#{tcr_isRunStaus})
+  </insert> 
+
+    <!-- 更新用例执行结果--> 
+<update id="updResultInfo" >
+   
+   </update> 
+  
+</mapper>

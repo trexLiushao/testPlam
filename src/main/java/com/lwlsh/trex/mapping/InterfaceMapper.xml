@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lwlsh.trex.dao.IinterfaceDao">
+	<!-- 数据访问层 -->
+	<resultMap type="com.lwlsh.trex.pojo.InterfacePojo" id="BaseResultMap">
+		 <id column="id" property="id" jdbcType="INTEGER" />
+		<result column="itf_smgId" property="itf_smgId" jdbcType="INTEGER" />
+		<result column="itf_interfaceName" property="itf_interfaceName" jdbcType="VARCHAR" />
+		<result column="itf_interfaceProt" property="itf_interfaceProt" jdbcType="VARCHAR" />
+		<result column="itf_interfaceMethod" property="itf_interfaceMethod" jdbcType="VARCHAR" />
+		<result column="itf_interfaceUrl" property="itf_interfaceUrl" jdbcType="VARCHAR" />
+		<result column="itf_interfaceDesc" property="itf_interfaceDesc" jdbcType="VARCHAR" />
+		<result column="itf_interfaceType" property="itf_interfaceType" jdbcType="VARCHAR" />
+		<result column="itf_interfaceParaType" property="itf_interfaceParaType" jdbcType="VARCHAR" />
+		<result column="itf_interfaceParam" property="itf_interfaceParam" jdbcType="VARCHAR" />
+		<result column="smg_sysName" property="smg_sysName" jdbcType="VARCHAR" />
+	</resultMap>
+	  <sql id="Base_Column_List" >
+    itf_smgId, itf_interfaceName, itf_interfaceProt,itf_interfaceMethod,itf_interfaceUrl,itf_interfaceDesc,itf_interfaceType,itf_interfaceParaType,itf_interfaceParam
+      </sql>
+        <!-- 增加接口信息--> 
+  <insert id="addInterfaceInfo">
+  insert into trex_interface(itf_smgId, itf_interfaceName,itf_interfaceProt,itf_interfaceMethod,itf_interfaceUrl,itf_interfaceDesc,itf_interfaceType,itf_interfaceParaType,itf_interfaceParam) 
+   values(#{itf_smgId},#{itf_interfaceName},#{itf_interfaceProt},#{itf_interfaceMethod},#{itf_interfaceUrl},#{itf_interfaceDesc},#{itf_interfaceType},#{itf_interfaceParaType},#{itf_interfaceParam})
+  </insert>
+   <!-- 查询所有的smg_sysName -->
+  <!-- mybatis 非常的智能，返回值统一使用 resultMap="BaseResultMap"，mybatis会根据查询到的条目数量自动进行判断，如果是一条就返回对象，如果是多条就返回List对象列表-->
+   <select id="getAllIntName" resultMap="BaseResultMap"  >
+    select  id,itf_interfaceName    from trex_interface where itf_smgId=#{itf_smgId} 
+  </select>
+     <!-- 查询某接口下的参数值 -->
+  <select id="getParamValue" resultMap="BaseResultMap"  >
+    select  itf_interfaceParam    from trex_interface where id=#{id} 
+  </select>
+  <!--      根据sysid查询接口名 -->
+  <select id="getInterfaceName" resultMap="BaseResultMap"  >
+    select  itf_interfaceName,id    from trex_interface where itf_smgId=#{sysid} 
+  </select>
+  <!--      根据id查询接口 -->
+  <select id="getItfById" resultMap="BaseResultMap"  >
+    select  *   from trex_interface where Id=#{0} 
+  </select>
+      
+      
+   <!-- 查询接口的字段值 -->
+   <select id="showParamInfo" resultMap="BaseResultMap">
+   select itf_interfaceParam from trex_interface where itf_smgId=#{itf_smgId} and itf_interfaceName=#{itf_interfaceName}
+   
+   </select>
+      
+  <!-- 查询所有主机的信息 分页用的 -->  
+  <select id="selectAllInterfaceInfo" parameterType="Map" resultMap="BaseResultMap" >
+  <!--   -->
+    select a.*,b.smg_sysName from trex_interface a,trex_sysMag b where a.itf_smgid = b.smg_id
+           <if test="page!=null and rows!=null">  
+               limit #{page},#{rows}                  
+           </if>    
+  </select>
+  
+    <!-- 查询所有接口的条数 -->  
+  <select id="getTotal"  resultType="long">
+    select count(*)
+    from trex_interface
+  </select>
+    <!-- 更新主机信息--> 
+	<update id="editInterfaceInfo" >
+        update trex_interface set itf_smgId=#{itf_smgId},itf_interfaceName=#{itf_interfaceName},itf_interfaceProt=#{itf_interfaceProt},
+        itf_interfaceMethod=#{itf_interfaceMethod},itf_interfaceUrl=#{itf_interfaceUrl},itf_interfaceDesc=#{itf_interfaceDesc},
+        itf_interfaceType=#{itf_interfaceType},itf_interfaceParaType=#{itf_interfaceParaType},itf_interfaceParam=#{itf_interfaceParam}
+         where id=#{id}
+   </update>
+     <!-- 删除主机信息--> 
+   <delete id="delInterfaceInfo">
+        delete from trex_interface where id=#{id}
+    </delete>
+</mapper>

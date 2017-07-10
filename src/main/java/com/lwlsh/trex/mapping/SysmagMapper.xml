@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lwlsh.trex.dao.IsysmagDao">
+	<!-- 数据访问层 -->
+	<resultMap type="com.lwlsh.trex.pojo.Sysmag" id="BaseResultMap">
+		<!-- <id column="smg_id" property="smg_id" jdbcType="INTEGER" /> -->
+		<result column="smg_id" property="smg_id" jdbcType="INTEGER" />
+		<result column="smg_hostIP" property="smg_hostIP" jdbcType="VARCHAR" />
+		<result column="smg_hostPort" property="smg_hostPort" jdbcType="VARCHAR" />
+		<result column="smg_dbName" property="smg_dbName" jdbcType="VARCHAR" />
+		<result column="smg_dbAnt" property="smg_dbAnt" jdbcType="VARCHAR" />
+		<result column="smg_dbPwd" property="smg_dbPwd" jdbcType="VARCHAR" />
+		<result column="smg_desc" property="smg_desc" jdbcType="VARCHAR" />
+		<result column="smg_status" property="smg_status" jdbcType="VARCHAR" />
+		<result column="smg_status" property="smg_status" jdbcType="VARCHAR" />
+		<result column="smg_sysName" property="smg_sysName" jdbcType="VARCHAR" />
+	</resultMap>
+	  <sql id="Base_Column_List" >
+    smg_id, smg_hostIP, smg_hostPort,smg_dbName,smg_dbAnt,smg_dbPwd,smg_desc,smg_status,smg_type,smg_sysName
+  </sql>
+  <!-- 查询所有主机的信息 -->  
+  <select id="selectAllSysmag" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from trex_sysmag
+  </select>
+  
+  
+  <!--      根据id查询接口 -->
+  <select id="getSysById" resultMap="BaseResultMap"  >
+    select  *   from trex_sysmag where smg_id=#{0} 
+  </select>
+      
+  <!-- 查询所有的smg_sysName -->
+  <!-- mybatis 非常的智能，返回值统一使用 resultMap="BaseResultMap"，mybatis会根据查询到的条目数量自动进行判断，如果是一条就返回对象，如果是多条就返回List对象列表-->
+   <select id="getAllsmgName" resultMap="BaseResultMap"  >
+    select  smg_id,smg_sysName    from trex_sysmag 
+  </select>
+  
+  
+    <!-- 查询所有主机的信息 分页用的 -->  
+  <select id="selectAllSysmagr" parameterType="Map" resultMap="BaseResultMap">
+    select * from trex_sysmag  
+      <where>            
+           <if test="smg_sysName!=null and smg_sysName!= '' ">  
+               <!--   
+                  特别提醒一下， $只是字符串拼接， 所以要特别小心sql注入问题。  
+                  在开发时使用: $,方便调试sql,发布时使用: #  
+                 and name like #{name},  
+                 '%${name}%' 
+               -->  
+               and smg_sysName like CONCAT('%',#{smg_sysName},'%')         
+           </if>    
+            <if test="smg_type!=null and smg_type!= ''">  
+               and smg_type= #{smg_type}                    
+            </if>      
+         </where>    
+           <if test="page!=null and rows!=null">  
+               limit #{page},#{rows}                  
+           </if>    
+  </select>
+  
+    <!-- 查询所有主机的条数 -->  
+  <select id="getTotal"  resultType="long">
+    select count(*)
+    from trex_sysmag
+  </select>
+  
+  <!-- 增加主机信息--> 
+  <insert id="addSysmag">
+  insert into trex_sysmag(smg_hostIP, smg_hostPort,smg_dbName,smg_dbAnt,smg_dbPwd,smg_desc,smg_status,smg_type,smg_sysName) 
+   values(#{smg_hostIP},#{smg_hostPort},#{smg_dbName},#{smg_dbAnt},#{smg_dbPwd},#{smg_desc},#{smg_status},#{smg_type},#{smg_sysName})
+  </insert>
+    <!-- 删除主机信息--> 
+   <delete id="delSysmag">
+        delete from trex_sysmag where smg_id=#{smg_id}
+    </delete>
+    <!-- 更新主机信息--> 
+	<update id="editSysmag" >
+        update trex_sysmag set smg_hostIP=#{smg_hostIP},smg_hostPort=#{smg_hostPort},smg_dbName=#{smg_dbName},smg_dbAnt=#{smg_dbAnt},smg_dbPwd=#{smg_dbPwd},smg_desc=#{smg_desc},smg_status=#{smg_status},smg_type=#{smg_type},smg_sysName=#{smg_sysName}
+         where smg_id=#{smg_id}
+   </update>
+</mapper>

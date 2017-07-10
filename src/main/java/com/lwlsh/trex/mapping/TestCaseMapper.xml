@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lwlsh.trex.dao.ItestCaseDao">
+	<!-- 数据访问层 -->
+	<resultMap type="com.lwlsh.trex.pojo.TestCasePojo" id="BaseResultMap">
+		 <id column="id" property="id" jdbcType="INTEGER" />
+		<result column="tc_interfaceId" property="tc_interfaceId" jdbcType="INTEGER" />
+		<result column="tc_inputData" property="tc_inputData" jdbcType="VARCHAR" />
+		<result column="tc_exptData" property="tc_exptData" jdbcType="VARCHAR" />
+		<result column="tc_caseLevel" property="tc_caseLevel" jdbcType="VARCHAR" />
+		<result column="tc_sysId" property="tc_sysId" jdbcType="INTEGER" />
+		<result column="tc_supInterId" property="tc_supInterId" jdbcType="INTEGER" />
+		<result column="tc_valDb" property="tc_valDb" jdbcType="VARCHAR" />
+		<result column="tc_sqlyuju" property="tc_sqlyuju" jdbcType="VARCHAR" />
+		<result column="tc_sqlexptData" property="tc_sqlexptData" jdbcType="VARCHAR" />
+		<result column="tc_tcdesc" property="tc_tcdesc" jdbcType="VARCHAR" />
+	</resultMap>
+	  <sql id="Base_Column_List" >
+    id,tc_interfaceId, tc_inputData, tc_exptData,tc_caseLevel,tc_sysId,tc_supInterId,tc_valDb,tc_sqlyuju,tc_sqlexptData,tc_tcdesc
+      </sql>
+      
+      
+      
+        <!-- 增加接口信息--> 
+  <insert id="addTestcaseInfo">
+  insert into trex_testcase(tc_interfaceId, tc_inputData,tc_exptData,tc_caseLevel,tc_sysId,tc_supInterId,tc_valDb,tc_sqlyuju,tc_tcdesc) 
+   values(#{tc_interfaceId},#{tc_inputData},#{tc_exptData},#{tc_caseLevel},#{tc_sysId},#{tc_supInterId},#{tc_valDb},#{tc_sqlyuju},#{tc_tcdesc})
+  </insert> 
+  
+    <!-- 查询所有主机的信息 分页用的 -->  
+  <select id="selectAllTestCaseInfo" parameterType="Map" resultMap="BaseResultMap" >
+  <!--   -->
+    select a.* from trex_testcase a
+          <where>               
+            <if test="tc_sysId!=null and tc_sysId!= ''">  
+               and tc_sysId= #{tc_sysId}                    
+            </if>      
+         </where>    
+           <if test="page!=null and rows!=null">  
+               limit #{page},#{rows}                  
+           </if>  
+  </select>
+  
+      <!-- 查询所有接口的条数 -->  
+  <select id="getTotal"  resultType="long">
+    select count(*)
+    from trex_testcase
+  </select>
+  
+       <!-- 删除用例信息--> 
+   <delete id="delTcModelInfo">
+        delete from trex_testcase where id=#{id}
+    </delete> 
+      
+      <!-- 根据用例id查询信息 -->
+	<select id="getTcById" resultMap="BaseResultMap">
+	select * from trex_testcase where id=#{0}
+	</select>
+  
+
+
+</mapper>

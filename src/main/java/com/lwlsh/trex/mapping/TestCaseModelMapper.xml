@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lwlsh.trex.dao.ItestCasemodelDao">
+	<!-- 数据访问层 -->
+	<resultMap type="com.lwlsh.trex.pojo.TestCaseModelPojo" id="BaseResultMap">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="tcm_sysId" property="tcm_sysId" jdbcType="INTEGER" />
+		<result column="tcm_tcListId" property="tcm_tcListId" jdbcType="VARCHAR" />
+		<result column="tcm_name" property="tcm_name" jdbcType="VARCHAR" />
+		<result column="tcm_status" property="tcm_status" jdbcType="VARCHAR" />
+		<result column="tcm_tcmDes" property="tcm_tcmDes" jdbcType="VARCHAR" />
+	</resultMap>
+	  <sql id="Base_Column_List" >
+    id,tcm_sysId, tcm_tcListId, tcm_name,tcm_status,tcm_tcmDes
+      </sql>
+      
+   <!-- 增加用例模块管理信息--> 
+  <insert id="addTestcaseModeInfo">
+  insert into trex_testcasemode(tcm_sysId, tcm_tcListId,tcm_name,tcm_status,tcm_tcmDes) 
+   values(#{tcm_sysId},#{tcm_tcListId},#{tcm_name},#{tcm_status},#{tcm_tcmDes})
+  </insert> 
+  
+  <!-- 查询所有用例模块信息 分页用的 -->  
+ <select id="selectAllTestCaseModel" parameterType="Map" resultMap="BaseResultMap" >
+    select * from trex_testcasemode
+     <where>    
+              <if test="tcm_name!=null and tcm_name!= '' ">  
+               and tcm_name like CONCAT('%',#{tcm_name},'%')         
+           </if> 
+     </where>
+       <if test="page!=null and rows!=null">  
+               limit #{page},#{rows}                  
+           </if>  
+  </select> 
+  
+    <!-- 查询所有的 用例模块的条数 -->  
+ <select id="getTotal"  resultType="long">
+    select count(*)
+    from trex_testcasemode
+  </select> 
+    <!-- 更新主机信息--> 
+<update id="updateTcModelInfo" >
+        update trex_testcasemode set tcm_sysId=#{tcm_sysId},tcm_tcListId=#{tcm_tcListId},tcm_name=#{tcm_name},
+        tcm_tcmDes=#{tcm_tcmDes}
+         where id=#{id}
+   </update> 
+     <!-- 删除主机信息--> 
+  <delete id="delTcModelInfo">
+        delete from trex_testcasemode where id=#{id}
+    </delete>
+</mapper>
