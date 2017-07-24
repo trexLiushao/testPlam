@@ -124,6 +124,7 @@ function openAddInterface() {
     url="/SSMiframe/saveInterface";
 }
 function saveInterface(){
+	
     $("#fm").form("submit", {
         url : url,
         success : function(result) {

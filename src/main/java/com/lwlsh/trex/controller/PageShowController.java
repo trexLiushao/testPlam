@@ -39,6 +39,15 @@ public class PageShowController {
 	public String showInterface(){
 		 return "InterfaceMagr";
 	}
+	
+	/**
+	 * 显示接口管理页面
+	 * @return
+	 */
+	@RequestMapping(value ="/userkeyword")
+	public String showUserky(){
+		 return "kw_userKeyword";
+	}
 	/**
 	 * 显示用例管理页面
 	 * @return
@@ -74,4 +83,22 @@ public class PageShowController {
 		return "result";
 	}
 
+//============================================关键字===========
+	/**
+	 * kw_keyword
+	 * @return
+	 */
+	@RequestMapping(value ="/keyword")
+	public String showKeyword(){
+		return "kw_userKeyword";
+	}
+	
+	
+	@RequestMapping(value ="/pageData")
+	public String getPage(){
+		return "kw_pageManger";
+	}
+	
+	
+	
 }

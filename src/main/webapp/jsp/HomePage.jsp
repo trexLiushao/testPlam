@@ -39,6 +39,34 @@
 							</ul>
 					</li>
 				</ul>
+				
+				
+					<ul>
+					<li>
+							<span>UI</span>
+							<ul>
+								<li>
+								<span><a href="#" class="easyui-linkbutton" onclick="testAddSubPage('关键字管理','userkeyword')">关键字管理</a></span><br/>
+								</li>
+								<li>
+									<span><a href="#" class="easyui-linkbutton">元素管理</a></span>
+									<ul class="easyui-tree">
+										<li><span><a href="#" class="easyui-linkbutton" onclick="testAddSubPage('页面管理','pageData')">页面管理</a></span></li>
+										<li><span><a href="#" class="easyui-linkbutton" onclick="testAddSubPage('用例管理','testCaseData')">页面元素管理</a></span></li>
+									</ul>
+								</li>
+								<li>
+								<span><a href="#" class="easyui-linkbutton" onclick="testAddSubPage('用例管理','testCaseData')">用例管理</a></span>
+								</li>
+								<li>
+								<span><a href="#" class="easyui-linkbutton" onclick="testAddSubPage('用例模块管理','testCaseModelData')">用例模块管理</a></span>
+								</li>
+								<li>
+								<span><a href="#" class="easyui-linkbutton" onclick="testAddSubPage('结果报告','result')">结果报告</a></span>
+								</li>
+							</ul>
+					</li>
+				</ul>
 			</li>
 			
 		</ul>	
