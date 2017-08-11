@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--管理一个页面的元素（webelement：input,select,textare,a,li等标签），一个page包含多个locator对象Pagename:page对象名字(填写的是包名下的对应类)Value：页面对象的URL，可不填。 Desc:页面对象中文描述-->
+<map>
+  <page pageName="com.lwlsh.trex.webdriver.loginPage">
+    <locator type="xpath" desc="xpath" value="//a[input]">123</locator>
+    <locator type="xpath" desc="xpath" value="//a[input]">123</locator>
+  </page>
+</map>

@@ -103,7 +103,7 @@ public class TestCaseController {
 	/**
 	 * 更新用例信息
 	 */
-	@RequestMapping(value="/editTestCase")
+	@RequestMapping(value="/updateTcase")
 	public @ResponseBody JSONObject editHost(TestCasePojo testCasePojo) throws Exception{
 		System.out.println("$$$$$$$$:进来了"+testCasePojo);
 		int resultTotle=0;

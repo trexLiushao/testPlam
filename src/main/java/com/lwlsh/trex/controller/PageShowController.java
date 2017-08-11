@@ -98,7 +98,23 @@ public class PageShowController {
 	public String getPage(){
 		return "kw_pageManger";
 	}
+	@RequestMapping(value ="/elementData")
+	public String getElement(){
+		return "kw_elementMg";
+	}
+	@RequestMapping(value ="/testcaseData")
+	public String getTestcase(){
+		return "kw_testcaseMg";
+	}
 	
-	
+	@RequestMapping(value ="/unitTcData")
+	public String getUnitTc(){
+		return "kw_unitTcase";
+	}
+	@RequestMapping(value ="/kwResult")
+	public String getResult(){
+		return "kw_result";
+	}
+
 	
 }

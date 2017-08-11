@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+	<parameter name="driver" value="chrome" /> <!--测试浏览器：支持火狐，谷歌，IE-->
+	<parameter name="pageName" value="loginPage" /> <!--pageName,根据pgagename获去操作的locator-->	
+<!-- 	<listeners>监听器设置
+        <listener class-name="org.trex.lwlsh.utils.TestListener"></listener>
+        <listener class-name="org.trex.lwlsh.utils.TestReport"></listener>
+    </listeners> -->
+     <test name="登录失败测试用例：数据驱动"> <!-- 测试用例描述-->
+       <classes>
+      <class name="com.lwlsh.trex.controller.Bclass">
+      	     <methods >
+                   <include name="loginFail" />
+             </methods>
+       </class>
+    </classes>
+  </test> 
+</suite>

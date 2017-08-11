@@ -52,17 +52,19 @@
 									<span><a href="#" class="easyui-linkbutton">元素管理</a></span>
 									<ul class="easyui-tree">
 										<li><span><a href="#" class="easyui-linkbutton" onclick="testAddSubPage('页面管理','pageData')">页面管理</a></span></li>
-										<li><span><a href="#" class="easyui-linkbutton" onclick="testAddSubPage('用例管理','testCaseData')">页面元素管理</a></span></li>
+										<li><span><a href="#" class="easyui-linkbutton" onclick="testAddSubPage('元素管理','elementData')">元素管理</a></span></li>
 									</ul>
 								</li>
 								<li>
-								<span><a href="#" class="easyui-linkbutton" onclick="testAddSubPage('用例管理','testCaseData')">用例管理</a></span>
+								<span><a href="#" class="easyui-linkbutton">用例管理</a></span>
+									<ul class="easyui-tree">
+										<li><span><a href="#" class="easyui-linkbutton" onclick="testAddSubPage('用例模块维护','testcaseData')">用例模块</a></span></li>
+										<li><span><a href="#" class="easyui-linkbutton" onclick="testAddSubPage('单元用例维护','unitTcData')">单元用例</a></span></li>
+									</ul>
+								
 								</li>
 								<li>
-								<span><a href="#" class="easyui-linkbutton" onclick="testAddSubPage('用例模块管理','testCaseModelData')">用例模块管理</a></span>
-								</li>
-								<li>
-								<span><a href="#" class="easyui-linkbutton" onclick="testAddSubPage('结果报告','result')">结果报告</a></span>
+								<span><a href="#" class="easyui-linkbutton" onclick="testAddSubPage('结果报告','kwResult')">结果报告</a></span>
 								</li>
 							</ul>
 					</li>

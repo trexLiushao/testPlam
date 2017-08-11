@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lwlsh.trex.dao.IkwPagemgDao">
+	<!-- 数据访问层 -->
+	<resultMap type="com.lwlsh.trex.pojo.KwPagePojo" id="BaseResultMap">
+		 <id column="pageID" property="pageID" jdbcType="INTEGER" />
+		<result column="pageName" property="pageName" jdbcType="VARCHAR" />
+		<result column="pagedesc" property="pagedesc" jdbcType="VARCHAR" />
+
+	</resultMap>
+
+        <!--获取所有的page--> 
+  <select id="getAllPage" parameterType="Map" resultMap="BaseResultMap">
+    select * from kw_pagemg
+      <if test="page!=null and rows!=null">  
+               limit #{page},#{rows}                  
+       </if>    
+  </select>
+  
+  
+         <!-- 增加page信息--> 
+  <insert id="addPagemg">
+  insert into kw_pagemg(pageName,pagedesc) 
+   values(#{pageName},#{pagedesc})
+  </insert>
+  
+ 
+  	<!-- 根据ID返回pageName -->
+  <select id="getNameById" parameterType="Map"  resultType="java.lang.String">
+    select pageName from kw_pagemg  where pageID=#{pageID}
+  </select>
+  	
+</mapper>

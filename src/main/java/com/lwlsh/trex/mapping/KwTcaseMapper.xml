@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lwlsh.trex.dao.IkwTcDao">
+	<!-- 数据访问层 -->
+	<resultMap type="com.lwlsh.trex.pojo.KwTcasePojo" id="BaseResultMap">
+		 <id column="id" property="id" jdbcType="INTEGER" />
+		 <result column="testId" property="testId" jdbcType="INTEGER" />
+		 <result column="teststep" property="teststep" jdbcType="INTEGER" />
+		 <result column="pageName" property="pageName" jdbcType="VARCHAR" />
+		<result column="elementXpath" property="elementXpath" jdbcType="VARCHAR" />
+		<result column="elementType" property="elementType" jdbcType="VARCHAR" />
+		 <result column="tcdesc" property="tcdesc" jdbcType="VARCHAR" />
+		<result column="keywordValue" property="keywordValue" jdbcType="VARCHAR" />
+		<result column="inputData" property="inputData" jdbcType="VARCHAR" />
+	</resultMap>
+
+<!--         获取所有的   返回去重后testid后的前10条-->  
+  <select id="getAllTc" parameterType="Map" resultMap="BaseResultMap">
+      SELECT * FROM kw_testcase t WHERE t.`testId` IN 
+        <if test="page!=null and rows!=null">  
+             (SELECT DISTINCT(testId) FROM (SELECT DISTINCT(testId) FROM kw_testcase LIMIT #{page},#{rows}) AS a   ORDER BY testId  ) 
+       </if>   
+      ORDER BY t.`testId` ,t.`teststep`  ;
+  <!--   select * from kw_testcase order by testId,teststep 
+     <if test="page!=null and rows!=null">  
+           LIMIT #{page},#{rows}
+       </if>  
+   -->
+     
+  </select>
+  
+         <!-- 增加信息--> 
+  <insert id="addTcase">
+  insert into kw_testcase(testId,teststep,pageName,elementXpath,tcdesc,keywordValue,inputData,elementType) 
+   values(#{testId},#{teststep},#{pageName},#{elementXpath},#{tcdesc},#{keywordValue},#{inputData},#{elementType})
+  </insert>
+    <!-- 更新信息--> 
+	<update id="updateTcase" >
+        update kw_testcase set testId=#{testId},teststep=#{teststep},pageName=#{pageName},
+        elementXpath=#{elementXpath},tcdesc=#{tcdesc},keywordValue=#{keywordValue},
+        inputData=#{inputData},elementType=#{elementType}
+         where id=#{id}
+   </update>
+  	
+	     <!-- 删除信息--> 
+   <delete id="delTcase">
+        delete from kw_testcase where id=#{id}
+    </delete>
+    
+   
+   	<!-- 根据ID返回 -->
+<!--   <select id="getNameById" parameterType="Map"  resultType="java.lang.String">
+    select * from kw_testcase  where testId=#{testId} limit 1;
+  </select> -->
+  
+  <!-- 根據getAllTcbyId -->
+   <select id="getAllTcbyId" parameterType="Map"  resultMap="BaseResultMap">
+     SELECT * FROM kw_testcase  WHERE testId=#{testId} ORDER BY teststep
+  </select>
+  
+   <!-- 根據   -->
+   <select id="getDescById" resultType="string" parameterType="map" >
+          SELECT tcdesc FROM kw_testcase  WHERE testId=#{testId} ORDER BY teststep LIMIT 1;
+  </select>
+ 
+</mapper>
