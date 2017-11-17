@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
-import com.lwlsh.trex.pojo.User;
 import com.lwlsh.trex.service.IUserService;
 
 @Controller

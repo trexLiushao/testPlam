@@ -16,37 +16,38 @@ public class Cclass {
 
 	private static  WebDriver driver;
 	public Cclass(){
-//		System.out.println(System.getProperty("user.dir"));
-//		//C:\Users\Administrator\Desktop\src\main\resources\chromedriver.exe这里不知道为什么是在C盘，后续改回来
-//		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"\\chromedriver.exe");
-//		ChromeOptions options = new ChromeOptions();
-//		options.addArguments("default");
-//		options.addArguments("--test-type");
+		System.out.println(System.getProperty("user.dir"));
+		//C:\Users\Administrator\Desktop\src\main\resources\chromedriver.exe这里不知道为什么是在C盘，后续改回来
+		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"\\chromedriver.exe");
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("default");
+		options.addArguments("--test-type");
 		driver = new SeleniumDriver("chrome").getDriver();
 		driver.manage().window().maximize();
 	}
 	
-//	public void methodA(){
-////
-////		try {
-////			Thread.sleep(3000);
-////		} catch (InterruptedException e) {
-////			// TODO Auto-generated catch block
-////			e.printStackTrace();
-////		}
-////		//driver.navigate().to("http://www.baidu.com");
-//		
+	public void methodA(){
+//
 //		try {
-//			this.perform("GOTOURL", "", "", "http://indiawmcrowdsoursing.test.uae.uc.cn/login");
-//			this.perform("SETTEXT", "//input[@id='username']", "xpath", "super");
-//			this.perform("SETTEXT", "//input[@id='password']", "xpath", "123");
-//			this.perform("CLICK", "//button[@class='ant-btn ant-btn-primary ant-btn-lg']", "xpath", "");
-//		} catch (Exception e) {
+//			Thread.sleep(3000);
+//		} catch (InterruptedException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-//		
-//	}
+//		//driver.navigate().to("http://www.baidu.com");
+		
+		try {
+			this.perform("GOTOURL", "", "", "http://indiawmwebsite.test.uae.uc.cn/god_login?people_id=5c08dcb3624543b2b16f9b6b2d9d54aa");
+			this.perform("GOTOURL", "", "", "http://indiawmwebsite.test.uae.uc.cn/god_login");
+			this.perform("SETTEXT", "//input[@id='username']", "xpath", "super");
+			this.perform("SETTEXT", "//input[@id='password']", "xpath", "123");
+			this.perform("CLICK", "//button[@class='ant-btn ant-btn-primary ant-btn-lg']", "xpath", "");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
 	
 	/**

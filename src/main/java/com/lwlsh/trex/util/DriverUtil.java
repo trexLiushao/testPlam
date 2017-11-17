@@ -8,12 +8,32 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class DriverUtil {
 	
-	private static  WebDriver driver;
+	public  static  WebDriver driver;
 	public DriverUtil(){
 		driver = new SeleniumDriver("chrome").getDriver();
 		driver.manage().window().maximize();
 	}
 	
+	/**
+	 * 期望值关键字调用方法
+	 * @param operation
+	 * @param objectName
+	 * @param objectType
+	 * @param elementValue
+	 * @throws Exception
+	 */
+	 public void performAssert(String operation,String objectName,String objectType,String elementValue) throws Exception{
+		 
+	 }
+	
+	/**
+	 * 关键字操作
+	 * @param operation
+	 * @param objectName
+	 * @param objectType
+	 * @param elementValue
+	 * @throws Exception
+	 */
 	 public void perform(String operation,String objectName,String objectType,String elementValue) throws Exception{
 	        switch (operation.toUpperCase()) {
 	        case "CLICK":
@@ -43,6 +63,10 @@ public class DriverUtil {
 	        case "DEFAULTIFRAME":
 	            //改变changeIframe
 	            ChangeIframe.defoutContent(driver);
+	            break;
+	        case "ASSERT":
+	            //获取预期值去判断页面是否有这个值
+	        	AssertUtil.pageConText(driver, elementValue);
 	            break;
 	        default:
 	            break;

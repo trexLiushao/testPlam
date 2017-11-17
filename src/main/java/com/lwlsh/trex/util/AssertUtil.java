@@ -1,12 +1,17 @@
 package com.lwlsh.trex.util;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -19,7 +24,7 @@ import org.testng.Assert;
 public class AssertUtil {
 	
 	public static List<Error> errors=new ArrayList<Error>();
-	//收集断言信息文本，用于报表展示
+	
 	public static List<String> assertInfolList=new ArrayList<String>();
 	
 	//收集信息文本用于报表展示
@@ -30,49 +35,75 @@ public class AssertUtil {
 	private static Log log=new Log(AssertUtil.class);
 	public static String formatDate(Date date)
 	{
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HHmmssSSS");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return formatter.format(date).toString();
 	}
 	
 	
-	@SuppressWarnings("unused")
-	private static void snapshotInfo( WebDriver driver)
-	{
-		ScreenShot screenShot=new ScreenShot(driver);
-		//设置截图名字
-
-		Date nowDate=new Date();
-		screenShot.setscreenName(AssertUtil.formatDate(nowDate));
-		screenShot.takeScreenshot();
-	
-		AssertUtil.messageList.add("&lt;a class=\"clickbox\" href=\"#url\"&gt;\n"
-				+ "&lt;img src=\"snapshot/"
-				+ AssertUtil.formatDate(nowDate)
-				+ ".jpg\" height=\"100\" width=\"100\" alt=\"\" /&gt;\n"
-				+ "&lt;b class=\"lightbox\"&gt;\n"
-				+ "&lt;b class=\"light\"&gt;&lt;/b&gt;\n"
-				+ "&lt;b class=\"box\"&gt;\n"
-				+ "&lt;img src=\"snapshot/"
-				+ AssertUtil.formatDate(nowDate)
-				+ ".jpg\" height=\"530\" width=\"1024\" onmousewheel=\"return bigimg(this)\" alt=\"\" /&gt;\n"
-				+ "&lt;span&gt;滚动鼠标缩放大小,点击X关闭当前图片，返回报表界面.&lt;br /&gt;&lt;i&gt;&lt;/i&gt;&lt;/span&gt;\n"
-				+ "&lt;/b&gt;\n"
-				+ "&lt;/b&gt;\n"
-				+ "&lt;/a&gt;\n"
-				+ "&lt;br class=\"clear\" /&gt;\n"
-				+"&lt;a class=\"clickbox\" href=\"#url\"&gt;"
-				+ "点击查看大图"
-				+ "&lt;b class=\"lightbox\"&gt;"
-				+ "&lt;b class=\"light\"&gt;&lt;/b&gt;"
-				+ "&lt;b class=\"box\"&gt;&lt;img src=\"snapshot/"
-				+ ".jpg\" height=\"530\" width=\"1024\" onmousewheel=\"return bigimg(this)\" alt=\"\" /&gt;"
-				+ "&lt;span&gt;滚动鼠标缩放大小,点击X关闭当前图片，返回报表界面."
-				+ "&lt;br /&gt;&lt;i&gt;&lt;/i&gt;&lt;/span&gt;"
-				+ "&lt;/b&gt;"
-				+ "&lt;/b&gt;"
-				+ " &lt;/a&gt;\n&lt;/br&gt;"
-				+ "&lt;div id=\"close\"&gt;&lt;/div&gt;\n");
+	/**
+	 *执行中catch到的错误
+	 *永远返回false
+	 */
+	public   String  catchError(WebDriver driver){
+		//对页面截图
+		String screenName=AssertUtil.snapshotInfo(driver);
+		return screenName;
+		
+		
 	}
+	
+	
+	
+	/**
+	 * 判断页面是否有某个text
+	 */
+	public  static boolean pageConText(WebDriver driver,String elementValue){
+	boolean  flag=false;
+	WebElement element=driver.findElement(By.xpath("//*[contains(*,'" + elementValue + "')]")); 
+		if (element!=null) {
+			flag=true;
+		}
+		return flag;
+		
+	}
+	
+	
+	
+	@SuppressWarnings("unused")
+	private static  String  snapshotInfo( WebDriver driver)
+	{
+		// 以yyyymmddHHMMSS命名
+		String screenName = AssertUtil.formatDate(new Date()) + ".jpg";
+		File dir = new File("trex/snapshot");
+		if (!dir.exists())
+			dir.mkdirs();
+		String screenPath = dir.getAbsolutePath() + "\\" + screenName;
+		System.out.println(screenPath + "+TEST:");
+		takeScreenshot(screenPath,driver);
+		return screenName;
+	}
+
+	/**
+	 * 私有方法
+	 * 
+	 * @param screenPath
+	 */
+	private static  void takeScreenshot(String screenPath,WebDriver driver) {
+		try {
+			File scrFile = ((TakesScreenshot) driver)
+					.getScreenshotAs(OutputType.FILE);
+			System.out.println("TEST screenPath:" + scrFile);
+			FileUtils.copyFile(scrFile, new File(screenPath));
+		} catch (IOException e) {
+			System.out.println("Screen shot error: " + screenPath);
+		}
+	}
+
+	
+	
+	
+	
+	
 	/**
 
 	 * 验证actual实际值是否包含预期值exceptStr

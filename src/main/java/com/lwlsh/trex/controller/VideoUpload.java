@@ -2,6 +2,7 @@ package com.lwlsh.trex.controller;
 
 import java.util.Set;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -25,6 +26,7 @@ public class VideoUpload {
 		//跳出debug模式
 		Actions builder = new Actions(driver); 
 		builder.sendKeys(Keys.F12).perform();
+		
 		
 		//video
 		driverUtil.perform("click", "//a[contains(@href,'video')]", "xpath", "");
