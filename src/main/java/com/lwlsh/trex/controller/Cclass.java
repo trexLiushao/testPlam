@@ -37,11 +37,17 @@ public class Cclass {
 //		//driver.navigate().to("http://www.baidu.com");
 		
 		try {
-			this.perform("GOTOURL", "", "", "http://indiawmwebsite.test.uae.uc.cn/god_login?people_id=5c08dcb3624543b2b16f9b6b2d9d54aa");
-			this.perform("GOTOURL", "", "", "http://indiawmwebsite.test.uae.uc.cn/god_login");
-			this.perform("SETTEXT", "//input[@id='username']", "xpath", "super");
-			this.perform("SETTEXT", "//input[@id='password']", "xpath", "123");
-			this.perform("CLICK", "//button[@class='ant-btn ant-btn-primary ant-btn-lg']", "xpath", "");
+			this.perform("GOTOURL", "", "", "http://indiawmwebsite.test.uae.uc.cn/god_login?people_id=14cf0cb91b254cecb68ff8d14d8602b4");
+			this.perform("GOTOURL", "", "", "http://indiawmwebsite.test.uae.uc.cn/dashboard/article");
+			this.perform("CLICK", "html/body/div[1]/div[1]/div/div[3]/div[1]/div[1]/div[1]/span", "xpath", "");
+			Thread.sleep(1000);
+			this.perform("SETTEXT", "//*[@id='articleTitle']/textarea", "xpath", "Article test One onwe  lasdfl 1125");
+			this.perform("SETTEXT", "//*[@id='hugo-editor']/div[1]", "xpath", "Article test One onwe  lasdfl 1125 Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125");
+			Thread.sleep(2000);
+			this.perform("CLICK", "html/body/div[1]/div[1]/div/div[2]/div/div[2]/button[1]", "xpath", "");
+			Thread.sleep(2000);
+			this.perform("CLICK", "//*[@id='article-edit-root']/div/div/div[4]/div/div[2]/div/div[2]/button[2]", "xpath", "");
+			Thread.sleep(2000);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -162,6 +168,6 @@ public class Cclass {
 
 	public static void main(String[] args) {
 		Cclass cclass=new Cclass();
-		//cclass.methodA();
+		cclass.methodA();
 	}
 }
