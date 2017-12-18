@@ -15,10 +15,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.lwlsh.trex.util.HighLightUtil;
 import com.lwlsh.trex.util.SeleniumDriver;
 
-public class Cclass {
+public class VideoUploa {
 
 	private static  WebDriver driver;
-	public Cclass(){
+	public VideoUploa(){
 		System.out.println(System.getProperty("user.dir")+"\\chromedriver.exe");
 		//C:\Users\Administrator\Desktop\src\main\resources\chromedriver.exe这里不知道为什么是在C盘，后续改回来
 		System.setProperty("webdriver.chrome.driver", "E:\\repository\\chromedriver.exe");
@@ -200,7 +200,7 @@ public class Cclass {
 		}
 
 	public static void main(String[] args) {
-		Cclass cclass=new Cclass();
+		VideoUploa cclass=new VideoUploa();
 		cclass.methodA();
 	}
 }

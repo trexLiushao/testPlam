@@ -3,6 +3,7 @@ encoding//src/main/java/com/lwlsh/trex/controller/Atest.java=UTF-8
 encoding//src/main/java/com/lwlsh/trex/controller/Cclass.java=UTF-8
 encoding//src/main/java/com/lwlsh/trex/controller/KwRunModelController.java=UTF-8
 encoding//src/main/java/com/lwlsh/trex/controller/UserController.java=UTF-8
+encoding//src/main/java/com/lwlsh/trex/controller/VideoUploa.java=UTF-8
 encoding//src/main/java/com/lwlsh/trex/dao/IUserDao.java=UTF-8
 encoding//src/main/java/com/lwlsh/trex/dao/IkwPagemgDao.java=UTF-8
 encoding//src/main/java/com/lwlsh/trex/util/AssertUtil.java=UTF-8
