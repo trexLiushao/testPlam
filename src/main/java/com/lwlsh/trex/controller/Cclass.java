@@ -1,5 +1,10 @@
 package com.lwlsh.trex.controller;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -42,9 +47,10 @@ public class Cclass {
 	    String satrtTime=df.format(new Date());
 		System.out.println(satrtTime);// new Date()为获取当前系统时间
 		try {
-			this.perform("GOTOURL", "", "", "http://indiawmwebsite.test.uae.uc.cn/god_login?people_id=14cf0cb91b254cecb68ff8d14d8602b4");
-			this.perform("GOTOURL", "", "", "http://indiawmwebsite.test.uae.uc.cn/dashboard/article");
-			this.perform("CLICK", "html/body/div[1]/div[1]/div/div[3]/div[1]/div[1]/div[1]/span", "xpath", "");
+			this.perform("GOTOURL", "", "", "http://indiawmwebsiteprea.test.uae.uc.cn/god_login?people_id=14cf0cb91b254cecb68ff8d14d8602b4");
+			this.perform("GOTOURL", "", "", "http://indiawmwebsiteprea.test.uae.uc.cn/dashboard/article");
+			//this.perform("CLICK", "html/body/div[1]/div[1]/div/div[3]/div[1]/div[1]/div[1]/span", "xpath", "");
+			this.perform("CLICK", "html/body/div[1]/div[1]/div/div[3]/div[2]/div[1]/div[1]/div/span", "xpath", "");
 			Thread.sleep(1000);
 			String currentWindow = driver.getWindowHandle();// 获取当前窗口句柄
 			Set<String> handles = driver.getWindowHandles();// 获取所有窗口句柄
@@ -69,12 +75,34 @@ public class Cclass {
 			System.out.println("第一次奥德赛f");
 			//Thread.sleep(2000);
 			System.out.println("23423 2432");
-			this.perform("SETTEXT", "//*[@id='articleTitle']/textarea", "xpath", "Article test One onwe  lasdfl 1125");
+			this.perform("SETTEXT", "//*[@id='articleTitle']/div[1]", "xpath", "Article test One onwe  lasdfl 1125");
 			this.perform("SETTEXT", "//*[@id='hugo-editor']/div[1]", "xpath", "Article test One onwe  lasdfl 1125 Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125");
+			
+			
+			WebElement uploadButton = driver.findElement(By.xpath("//*[@id='hugo-editor']/div[1]"));
+			  StringSelection stringSelection = new StringSelection("<img src=\"https://imgsa.baidu.com/news/q%3D100/sign=910cba9104b30f24339ae803f894d192/267f9e2f07082838f5b5cde4b399a9014d08f182.jpg\">");
+			  Toolkit.getDefaultToolkit().getSystemClipboard() .setContents(stringSelection, null);
+			  // 模拟Ctrl+V，进行粘贴
+			    Robot robot = null;
+			    try {
+			      robot = new Robot();
+			    } catch (AWTException e1) {
+			      e1.printStackTrace();
+			    }
+			    robot.keyPress(KeyEvent.VK_CONTROL);
+			    robot.keyPress(KeyEvent.VK_V);
+			    robot.keyRelease(KeyEvent.VK_V);
+			    robot.keyRelease(KeyEvent.VK_CONTROL);
+		
+			 
+			
+			
+			//this.perform("SETTEXT", "//*[@id='hugo-editor']/div[1]", "xpath", "Article test One onwe  lasdfl 1125 Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1125Article test One onwe  lasdfl 1126");
 			//Thread.sleep(2000);
-			this.perform("CLICK", "html/body/div[1]/div[1]/div/div[2]/div/div[2]/button[3]", "xpath", "");
+			this.perform("CLICK", "html/body/div[1]/div/div[1]/div/div[2]/div/div[2]/button[3]", "xpath", "");
+			
 			Thread.sleep(2000);
-			this.perform("CLICK", "html/body/div[1]/div[1]/div/div[2]/div/div[2]/button[1]", "xpath", "");
+			this.perform("CLICK", "html/body/div[1]/div/div[1]/div/div[2]/div/div[2]/button[1]", "xpath", "");
 			//Thread.sleep(2000);
 			this.perform("CLICK", "//*[@id='article-edit-root']/div/div/div[4]/div/div[2]/div/div[2]/button[2]", "xpath", "");
 			//Thread.sleep(2000);
