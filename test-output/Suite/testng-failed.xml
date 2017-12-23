@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
+  <parameter name="pageName" value="loginPage"/>
+  <parameter name="driver" value="chrome"/>
+  <test name="testdocker(failed)">
+    <classes>
+      <class name="com.lwlsh.trex.controller.Dclass">
+        <methods>
+          <include name="grid"/>
+        </methods>
+      </class> <!-- com.lwlsh.trex.controller.Dclass -->
+    </classes>
+  </test> <!-- testdocker(failed) -->
+</suite> <!-- Failed suite [Suite] -->
